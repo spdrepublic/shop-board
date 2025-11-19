@@ -1,6 +1,6 @@
 import React from "react";
 import Column from "./Column";
-import { DragDropContext } from "react-beautiful-dnd";
+import { Droppable, Draggable } from "@hello-pangea/dnd";
 
 function Board({ board, setBoard }) {
   const handleDragEnd = (result) => {
