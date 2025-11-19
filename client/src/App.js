@@ -37,7 +37,8 @@ function App() {
   return (
     <div
       style={{
-        fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+        fontFamily:
+          "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
         backgroundColor: "#f5f5f5",
         minHeight: "100vh",
         display: "flex",
@@ -53,12 +54,13 @@ function App() {
         flagFilter={flagFilter}
         setFlagFilter={setFlagFilter}
       />
+      {/* For now, Board ignores filters (we'll re-enable later) */}
       <Board
-  board={board}
-  setBoard={setBoard}
-  searchTerm={searchTerm}
-  techFilter={techFilter}
-  flagFilter={flagFilter}
+        board={board}
+        setBoard={setBoard}
+        searchTerm={searchTerm}
+        techFilter={techFilter}
+        flagFilter={flagFilter}
       />
     </div>
   );
