@@ -26,8 +26,12 @@ function Column({ column }) {
           marginBottom: "6px"
         }}
       >
-        <div style={{ fontWeight: 600, fontSize: "14px" }}>{column.name}</div>
-        <div style={{ fontSize: "12px", opacity: 0.8 }}>{cards.length} job(s)</div>
+        <div style={{ fontWeight: 600, fontSize: "14px" }}>
+          {column.name}
+        </div>
+        <div style={{ fontSize: "12px", opacity: 0.8 }}>
+          {cards.length} job(s)
+        </div>
       </div>
 
       <div
