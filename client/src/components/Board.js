@@ -3,61 +3,11 @@ import Column from "./Column";
 import { DragDropContext } from "react-beautiful-dnd";
 
 function Board({ board, setBoard, searchTerm, techFilter, flagFilter }) {
-  const matchesFilters = (card) => {
-    const text = (
-      card.roNumber +
-      " " +
-      card.customerName +
-      " " +
-      card.vehicle +
-      " " +
-      card.tech +
-      " " +
-      card.advisor
-    )
-      .toLowerCase()
-      .trim();
-
-    if (searchTerm && !text.includes(searchTerm.toLowerCase())) {
-      return false;
-    }
-
-    if (techFilter !== "All Techs") {
-      if (!card.tech || card.tech !== techFilter) return false;
-    }
-
-    if (flagFilter === "Waiters") {
-      return card.badges && card.badges.some((b) => b.toUpperCase().includes("WAIT"));
-    }
-    if (flagFilter === "Comebacks") {
-      return card.badges && card.badges.some((b) => b.toUpperCase().includes("COMEBACK"));
-    }
-    if (flagFilter === "Tows") {
-      return card.badges && card.badges.some((b) => b.toUpperCase().includes("TOW"));
-    }
-
-    return true;
-  };
-
-  const filteredColumns = board.columns.map((col) => ({
-    ...col,
-    cards: (col.cards || []).filter(matchesFilters)
-  }));
-
   const handleDragEnd = (result) => {
     const { source, destination } = result;
 
     // dropped outside any column
     if (!destination) return;
-
-    // NOTE: for now, we only allow drag when filters are cleared
-    if (
-      searchTerm ||
-      techFilter !== "All Techs" ||
-      flagFilter !== "All"
-    ) {
-      return;
-    }
 
     const sourceColId = source.droppableId;
     const destColId = destination.droppableId;
@@ -70,6 +20,7 @@ function Board({ board, setBoard, searchTerm, techFilter, flagFilter }) {
       return;
     }
 
+    // work directly on board.columns
     const columns = Array.from(board.columns);
     const sourceColIndex = columns.findIndex((c) => c.id === sourceColId);
     const destColIndex = columns.findIndex((c) => c.id === destColId);
@@ -115,7 +66,7 @@ function Board({ board, setBoard, searchTerm, techFilter, flagFilter }) {
             minHeight: "calc(100vh - 120px)"
           }}
         >
-          {filteredColumns.map((column) => (
+          {board.columns.map((column) => (
             <Column key={column.id} column={column} />
           ))}
         </div>
