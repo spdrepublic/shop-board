@@ -54,10 +54,11 @@ function App() {
         setFlagFilter={setFlagFilter}
       />
       <Board
-        columns={board.columns}
-        searchTerm={searchTerm}
-        techFilter={techFilter}
-        flagFilter={flagFilter}
+  board={board}
+  setBoard={setBoard}
+  searchTerm={searchTerm}
+  techFilter={techFilter}
+  flagFilter={flagFilter}
       />
     </div>
   );
